@@ -5,8 +5,8 @@
 Open two terminal windows, in one of them, open the `api/` directory that contains the server code:
 
 ```bash
+pip install -r requirements.txt
 cd api
-pip freeze > requirements.txt
 python3 main.py
 ```
 
