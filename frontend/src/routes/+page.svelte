@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageData } from "./$types";
 
 	export let data: PageData;
 	$: response = data.response;
@@ -8,5 +8,6 @@
 <h1>Our app</h1>
 
 <p>
+	We are cooking
 	{response.Hello}
 </p>

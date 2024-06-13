@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+:root {
+	--ff-general: "Lato", sans-serif;
+	--color-primary: 251, 253, 255;
+	--color-secondary: 241, 244, 251;
+	--color-contrast-muted: 221, 232, 250;
+	--color-contrast: 39, 56, 106;
+
+	color-scheme: light dark;
+	background-color: rgb(var(--color-primary));
+	color: rgb(var(--color-contrast));
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	transition: all 0.125s linear;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	font-family: var(--ff-general);
+}
+
+footer {
+	margin-block-start: auto;
+	margin-block-end: 1.5rem;
+}
+
+html[data-theme="light"] {
+	--color-primary: 251, 253, 255;
+	--color-secondary: 241, 244, 251;
+	--color-contrast-muted: 233, 240, 251;
+	--color-contrast: 39, 56, 106;
+}
+
+html[data-theme="dark"] {
+	--color-primary: 26, 33, 37;
+	--color-secondary: 45, 50, 55;
+	--color-contrast-muted: 51, 65, 85;
+	--color-contrast: 187, 204, 230;
+}
