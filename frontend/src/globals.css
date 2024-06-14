@@ -6,7 +6,7 @@
 
 @layer base {
 	:root {
-		--background: 45 50 55;
+		--background: 34, 42, 45;
 		--foreground: 225, 234, 238;
 
 		--border: 34, 42, 45;
@@ -15,25 +15,25 @@
 		--accent: 45, 50, 55;
 		--accent-foreground: var(--foreground);
 
-		--ring: 0, 0, 0;
+		--popover: 34, 42, 45;
 	}
+}
 
-	:root {
-		--ff-general: "Lato", sans-serif;
+:root {
+	--ff-general: "Lato", sans-serif;
 
-		--background-400: 26, 33, 37;
-		--background-500: 34, 42, 45;
-		--background-600: 45, 50, 55;
+	--background-400: 26, 33, 37;
+	--background-500: 34, 42, 45;
+	--background-600: 45, 50, 55;
 
-		--foreground-600: 225, 234, 238;
+	--foreground-600: 225, 234, 238;
 
-		--constrast-400: 57, 78, 72;
-		--contrast-700: 32, 245, 113;
+	--constrast-400: 57, 78, 72;
+	--contrast-700: 32, 245, 113;
 
-		color-scheme: light dark;
-		background-color: rgb(var(--background-400));
-		color: rgb(var(--foreground-600));
-	}
+	color-scheme: light dark;
+	background-color: rgb(var(--background-400));
+	color: rgb(var(--foreground-600));
 }
 
 *,

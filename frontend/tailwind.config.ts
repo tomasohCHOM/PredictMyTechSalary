@@ -15,15 +15,19 @@ const config: Config = {
 		},
 		extend: {
 			colors: {
-				border: "rgb(var(--border) / <alpha-value>)",
-				input: "rgb(var(--input) / <alpha-value>)",
-				background: "rgb(var(--background) / <alpha-value>)",
-				foreground: "rgb(var(--foreground-600) / <alpha-value>)",
+				border: "rgb(var(--border))",
+				input: "rgb(var(--input))",
+				background: "rgb(var(--background))",
+				foreground: "rgb(var(--foreground))",
 				accent: {
-					DEFAULT: "rgb(var(--accent) / <alpha-value>)",
-					foreground: "rgb(var(--accent-foreground) / <alpha-value>)"
+					DEFAULT: "rgb(var(--accent))",
+					foreground: "rgb(var(--accent-foreground))"
 				},
-				ring: "rgb(var(--ring) / <alpha-value>)"
+				popover: {
+					DEFAULT: "rgb(var(--popover))",
+					foreground: "rgb(var(--popover-foreground))"
+				},
+				ring: "rgb(var(--ring))"
 			},
 			borderRadius: {
 				lg: "var(--radius)",
