@@ -21,12 +21,16 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		border-bottom: 2px solid rgb(var(--color-secondary));
+		border-bottom: 2px solid rgb(var(--background-500));
+	}
+
+	h1 {
+		font-weight: 700;
 	}
 
 	a {
 		text-decoration: none;
-		color: rgb(var(--color-contrast));
+		color: rgb(var(--foreground-600));
 	}
 
 	.left-section > h1 {
@@ -44,11 +48,11 @@
 		padding: 0.25rem 0.375rem;
 		border-radius: 0.25rem;
 		transition: filter 150ms ease;
-		background-color: rgb(var(--color-primary));
+		background-color: rgb(var(--background-400));
 		transition: background-color 150ms ease;
 	}
 
 	.right-section > .header-item:hover {
-		background-color: rgb(var(--color-secondary));
+		background-color: rgb(var(--background-600));
 	}
 </style>
