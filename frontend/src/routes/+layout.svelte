@@ -1,26 +1,8 @@
-<script lang="ts">
+<script>
+	import Navbar from "$lib/components/navbar.svelte";
 	import "../globals.css";
 </script>
 
-<nav>
-	<span>
-		<a href="/"> Predict </a>
-	</span>
-	<span>
-		<a href="/about"> About </a>
-	</span>
-</nav>
+<Navbar />
 
 <slot />
-
-<style>
-	nav {
-		display: flex;
-		gap: 1rem;
-	}
-
-	nav > span > a {
-		text-decoration: none;
-		color: var(--color-contrast);
-	}
-</style>

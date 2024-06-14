@@ -1,11 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 222.2 84% 4.9%;
+		--foreground: 210 40% 98%;
+
+		--muted: 217.2 32.6% 17.5%;
+		--muted-foreground: 215 20.2% 65.1%;
+
+		--popover: 222.2 84% 4.9%;
+		--popover-foreground: 210 40% 98%;
+
+		--card: 222.2 84% 4.9%;
+		--card-foreground: 210 40% 98%;
+
+		--border: 217.2 32.6% 17.5%;
+		--input: 217.2 32.6% 17.5%;
+
+		--primary: 210 40% 98%;
+		--primary-foreground: 222.2 47.4% 11.2%;
+
+		--secondary: 217.2 32.6% 17.5%;
+		--secondary-foreground: 210 40% 98%;
+
+		--accent: 217.2 32.6% 17.5%;
+		--accent-foreground: 210 40% 98%;
+
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 210 40% 98%;
+
+		--ring: hsl(212.7, 26.8%, 83.9);
+	}
+}
+
 :root {
 	--ff-general: "Lato", sans-serif;
-	--color-primary: 251, 253, 255;
-	--color-secondary: 241, 244, 251;
-	--color-contrast-muted: 221, 232, 250;
-	--color-contrast: 39, 56, 106;
+	--color-primary: 26, 33, 37;
+	--color-secondary: 45, 50, 55;
+	--color-contrast-muted: 51, 65, 85;
+	--color-contrast: 187, 204, 230;
 
 	color-scheme: light dark;
 	background-color: rgb(var(--color-primary));
@@ -24,6 +61,7 @@ html {
 
 body {
 	min-height: 100vh;
+	margin: 0;
 	display: flex;
 	flex-direction: column;
 	font-family: var(--ff-general);
@@ -32,18 +70,4 @@ body {
 footer {
 	margin-block-start: auto;
 	margin-block-end: 1.5rem;
-}
-
-html[data-theme="light"] {
-	--color-primary: 251, 253, 255;
-	--color-secondary: 241, 244, 251;
-	--color-contrast-muted: 233, 240, 251;
-	--color-contrast: 39, 56, 106;
-}
-
-html[data-theme="dark"] {
-	--color-primary: 26, 33, 37;
-	--color-secondary: 45, 50, 55;
-	--color-contrast-muted: 51, 65, 85;
-	--color-contrast: 187, 204, 230;
 }
