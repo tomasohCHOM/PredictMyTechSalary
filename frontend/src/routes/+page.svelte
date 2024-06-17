@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
 	import * as Select from "$lib/components/ui/select/index.js";
 	import type { ActionData } from "./$types";
 
-	export let formData: ActionData;
+	export let form: ActionData;
 
 	const fruits = [
 		{ value: "apple", label: "Apple" },
@@ -16,85 +17,36 @@
 <main>
 	<div class="salary-card">
 		<h2>Your predicted salary is:</h2>
-		{#if !formData || !formData.salary}
+		{#if !form || !form.salary}
 			<span class="salary-empty">$ - - - , - - -</span>
 		{:else}
-			<span class="salary">${formData?.salary}</span>
+			<span class="salary">${form.salary}</span>
 		{/if}
 	</div>
 
-	<form method="post" action="?/calculate" class="salary-form">
+	<form method="post" class="salary-form">
 		<div class="salary-inputs">
-			<div class="salary-input">
-				<span>Fruit type</span>
-				<Select.Root portal={null}>
-					<Select.Trigger>
-						<Select.Value placeholder="Select a fruit" />
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Fruits</Select.Label>
-							{#each fruits as fruit}
-								<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
-							{/each}
-						</Select.Group>
-					</Select.Content>
-					<Select.Input name="favoriteFruit" />
-				</Select.Root>
-			</div>
-			<div class="salary-input">
-				<span>Fruit type</span>
-				<Select.Root portal={null}>
-					<Select.Trigger>
-						<Select.Value placeholder="Select a fruit" />
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Fruits</Select.Label>
-							{#each fruits as fruit}
-								<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
-							{/each}
-						</Select.Group>
-					</Select.Content>
-					<Select.Input name="favoriteFruit" />
-				</Select.Root>
-			</div>
-			<div class="salary-input">
-				<span>Fruit type</span>
-				<Select.Root portal={null}>
-					<Select.Trigger>
-						<Select.Value placeholder="Select a fruit" />
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Fruits</Select.Label>
-							{#each fruits as fruit}
-								<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
-							{/each}
-						</Select.Group>
-					</Select.Content>
-					<Select.Input name="favoriteFruit" />
-				</Select.Root>
-			</div>
-			<div class="salary-input">
-				<span>Fruit type</span>
-				<Select.Root portal={null}>
-					<Select.Trigger>
-						<Select.Value placeholder="Select a fruit" />
-					</Select.Trigger>
-					<Select.Content>
-						<Select.Group>
-							<Select.Label>Fruits</Select.Label>
-							{#each fruits as fruit}
-								<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
-							{/each}
-						</Select.Group>
-					</Select.Content>
-					<Select.Input name="favoriteFruit" />
-				</Select.Root>
-			</div>
+			{#each { length: 4 } as _}
+				<div class="salary-input">
+					<span>Fruit type</span>
+					<Select.Root portal={null}>
+						<Select.Trigger>
+							<Select.Value placeholder="Select a fruit" />
+						</Select.Trigger>
+						<Select.Content>
+							<Select.Group>
+								<Select.Label>Fruits</Select.Label>
+								{#each fruits as fruit}
+									<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
+								{/each}
+							</Select.Group>
+						</Select.Content>
+						<Select.Input name="favoriteFruit" />
+					</Select.Root>
+				</div>
+			{/each}
 		</div>
-		<button class="btn-submit">Calculate!</button>
+		<button type="submit" class="btn-submit">Calculate!</button>
 	</form>
 </main>
 
