@@ -4,34 +4,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-	:root {
-		--background: 34, 42, 45;
-		--foreground: 225, 234, 238;
-
-		--border: 34, 42, 45;
-		--input: 34, 42, 45;
-
-		--accent: 45, 50, 55;
-		--accent-foreground: var(--foreground);
-
-		--popover: 34, 42, 45;
-	}
-}
-
 :root {
 	--ff-general: "Lato", sans-serif;
 
+	/* Main site color scheme */
 	--background-400: 26, 33, 37;
 	--background-500: 34, 42, 45;
 	--background-600: 45, 50, 55;
 
 	--foreground-600: 225, 234, 238;
 
-	--constrast-400: 57, 78, 72;
-	--contrast-700: 32, 245, 113;
+	--contrast-200: 47, 68, 62;
+	--contrast-400: 86, 159, 128;
+	--contrast-700: 32, 245, 143;
 
-	color-scheme: light dark;
+	/* Used for shadcn-svelte components */
+	--background: var(--background-500);
+	--foreground: var(--foreground-600);
+
+	--border: var(--background-500);
+	--input: var(--background-500);
+
+	--accent: var(--background-600);
+	--accent-foreground: var(--foreground-600);
+
+	--popover: var(--background-500);
+	--radius: 0.5rem;
+
 	background-color: rgb(var(--background-400));
 	color: rgb(var(--foreground-600));
 }

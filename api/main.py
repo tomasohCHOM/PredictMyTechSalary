@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get("/")
 def read():
-    return {"Hello": "World"}
+    return {"salary": 100000}
 
 
 if __name__ == "__main__":
