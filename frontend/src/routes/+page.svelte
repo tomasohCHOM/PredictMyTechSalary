@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
-	import * as Select from "$lib/components/ui/select/index.js";
+	import * as Select from "$lib/components/select/index.js";
 	import type { ActionData } from "./$types";
 	import { formInputs } from "$lib/form/inputs";
 
