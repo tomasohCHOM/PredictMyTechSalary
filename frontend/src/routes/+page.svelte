@@ -2,6 +2,7 @@
 	import { enhance } from "$app/forms";
 	import * as Select from "$lib/components/ui/select/index.js";
 	import type { ActionData } from "./$types";
+	import { formInputs } from "$lib/form/inputs";
 
 	export let form: ActionData;
 
@@ -24,20 +25,22 @@
 		{/if}
 	</div>
 
-	<form method="post" class="salary-form">
+	<form method="post" class="salary-form" use:enhance>
 		<div class="salary-inputs">
-			{#each { length: 4 } as _}
+			{#each formInputs as formInput}
 				<div class="salary-input">
-					<span>Fruit type</span>
+					<span>{formInput.inputLabel}</span>
 					<Select.Root portal={null}>
 						<Select.Trigger>
-							<Select.Value placeholder="Select a fruit" />
+							<Select.Value placeholder={formInput.selectLabel} />
 						</Select.Trigger>
 						<Select.Content>
 							<Select.Group>
-								<Select.Label>Fruits</Select.Label>
-								{#each fruits as fruit}
-									<Select.Item value={fruit.value} label={fruit.label}>{fruit.label}</Select.Item>
+								<Select.Label>{formInput.inputLabel}</Select.Label>
+								{#each formInput.selectItems as selectItem}
+									<Select.Item value={selectItem.value} label={selectItem.label}>
+										{selectItem.label}
+									</Select.Item>
 								{/each}
 							</Select.Group>
 						</Select.Content>

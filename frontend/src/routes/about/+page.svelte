@@ -2,6 +2,10 @@
 	const tags = ["Data Science", "Tech Industry", "Salaries", "Demographics", "Web"];
 </script>
 
+<svelte:head>
+	<title>Blog | Predict My Tech Salary</title>
+</svelte:head>
+
 <article>
 	<h1>Predict My Tech Salary - How It was Built</h1>
 
