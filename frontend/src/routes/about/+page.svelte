@@ -16,7 +16,38 @@
 		quos ullam odit!
 	</p>
 
-	<h2>Resources</h2>
+	<h2>Building the model</h2>
+
+	<h2>Challenges with building the model</h2>
+
+	<h2>The website</h2>
+
+	<p>
+		We wanted the user to easily interact with our model, and our best idea was to create a web user
+		interface with user input and a form submission button. With those things in mind, we decided to
+		build this web application using <b>SvelteKit</b> and <b>FastAPI</b>.
+	</p>
+	<p>
+		SvelteKit is a framework for building robust and performant web applications using Svelte, the
+		UI component framework that SvelteKit is built on top of. It supports routing (creating multiple
+		pages in the same application; how you can see this <code>/about</code> page), server-side rendering,
+		and building custom APIs. On the other hand, FastAPI is a fast, modern framework for building APIs
+		in Python. We decided to use these technologies because they made it easy to implement our application
+		features without distracting too much from the project's actual goal; developing the model.
+	</p>
+	<p>
+		The client-server interaction works like this: the SvelteKit application has the form element
+		that, when the user fills in the information and presses the "Calculate!" button, will create a
+		request to the API endpoint (the FastAPI application). If all goes well, the endpoint will
+		respond with the predicted salary and render it in the website.
+	</p>
+
+	<img src="/assets/client-server.png" alt="Client and Server interaction for our Website" />
+
+	<p>
+		Thankfully, this is quite a standard client-server interaction, so we did not encounter many
+		issues implementing this part of the project.
+	</p>
 
 	<div class="tags">
 		{#each tags as tag}
@@ -30,6 +61,7 @@
 		max-width: 75ch;
 		margin-inline: auto;
 		padding: 2rem;
+		padding-bottom: 5rem;
 		display: grid;
 		gap: 1rem;
 	}
@@ -76,6 +108,10 @@
 		}
 		h2 {
 			font-size: 1.5rem;
+		}
+
+		p {
+			font-size: 1.125rem;
 		}
 
 		.tag {
