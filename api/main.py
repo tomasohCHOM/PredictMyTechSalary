@@ -1,12 +1,36 @@
+from pydantic import BaseModel
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+import pickle as pkl
 import uvicorn
+
+
+class Items(BaseModel):
+    main_branch: str
+    employment: str
+    remote_work: str
+    years_code: str
+    org_size: str
+    country: str
+    age: str
+    gender: str
+    trans: str
+    sexuality: str
+    ethnicity: str
+    accessibility: str
+    work_exp: str
+
+
+def load_model():
+    with open("model/model.pkl", "rb") as model_file:
+        model = pkl.load(model_file)
+    return model
+
 
 app = FastAPI()
 
 
-@app.get("/")
-def read():
+@app.get("/predict")
+def predict(items: Items):
     return {"salary": 100000}
 
 
