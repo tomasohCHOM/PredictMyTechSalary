@@ -1,10 +1,12 @@
 type SelectFormInput = {
+	requestAttributeName: string;
 	inputLabel: string;
 	selectLabel: string;
 	selectItems: string[];
 };
 
 const devProfessionStatus: SelectFormInput = {
+	requestAttributeName: "main_branch",
 	inputLabel: "Developer Profession Status",
 	selectLabel: "Select your developer profession status",
 	selectItems: [
@@ -14,6 +16,7 @@ const devProfessionStatus: SelectFormInput = {
 };
 
 const employmentStatus: SelectFormInput = {
+	requestAttributeName: "employment",
 	inputLabel: "Employment Status",
 	selectLabel: "Select your employment status",
 	selectItems: [
@@ -25,12 +28,14 @@ const employmentStatus: SelectFormInput = {
 };
 
 const remoteWork: SelectFormInput = {
+	requestAttributeName: "remote_work",
 	inputLabel: "Remote Work",
 	selectLabel: "Select remote work option",
 	selectItems: ["Fully remote", "Hybrid (some remote, some in-person)", "Full in-person"]
 };
 
 const educationLevel: SelectFormInput = {
+	requestAttributeName: "ed_level",
 	inputLabel: "Education Level",
 	selectLabel: "Select education Level",
 	selectItems: [
@@ -47,6 +52,7 @@ const educationLevel: SelectFormInput = {
 };
 
 const yearsCoding: SelectFormInput = {
+	requestAttributeName: "years_code",
 	inputLabel: "Years Coding",
 	selectLabel: "Select the number of years you have been coding for (professionally or not)",
 	selectItems: [
@@ -58,7 +64,26 @@ const yearsCoding: SelectFormInput = {
 	]
 };
 
+const organizationSize: SelectFormInput = {
+	requestAttributeName: "org_size",
+	inputLabel: "Organization Size",
+	selectLabel: "Select the size of your organization",
+	selectItems: [
+		"20 to 99 employees",
+		"2 to 9 employees",
+		"5,000 to 9,999 employees",
+		"100 to 499 employees",
+		"10,000 or more employees",
+		"Just me - I am a freelancer, sole proprietor, etc.",
+		"500 to 999 employees",
+		"1,000 to 4,999 employees",
+		"10 to 19 employees",
+		"I don’t know"
+	]
+};
+
 const country: SelectFormInput = {
+	requestAttributeName: "country",
 	inputLabel: "Country",
 	selectLabel: "Select your country",
 	selectItems: [
@@ -79,24 +104,8 @@ const country: SelectFormInput = {
 	]
 };
 
-const organizationSize: SelectFormInput = {
-	inputLabel: "Organization Size",
-	selectLabel: "Select the size of your organization",
-	selectItems: [
-		"20 to 99 employees",
-		"2 to 9 employees",
-		"5,000 to 9,999 employees",
-		"100 to 499 employees",
-		"10,000 or more employees",
-		"Just me - I am a freelancer, sole proprietor, etc.",
-		"500 to 999 employees",
-		"1,000 to 4,999 employees",
-		"10 to 19 employees",
-		"I don’t know"
-	]
-};
-
 const age: SelectFormInput = {
+	requestAttributeName: "age",
 	inputLabel: "Age",
 	selectLabel: "Select an age",
 	selectItems: [
@@ -112,6 +121,7 @@ const age: SelectFormInput = {
 };
 
 const gender: SelectFormInput = {
+	requestAttributeName: "gender",
 	inputLabel: "Gender",
 	selectLabel: "Select a gender",
 	selectItems: [
@@ -123,6 +133,7 @@ const gender: SelectFormInput = {
 };
 
 const ethnicity: SelectFormInput = {
+	requestAttributeName: "ethnicity",
 	inputLabel: "Ethnicity",
 	selectLabel: "Select your ethnicity",
 	selectItems: [
@@ -143,6 +154,7 @@ const ethnicity: SelectFormInput = {
 };
 
 const workExperience: SelectFormInput = {
+	requestAttributeName: "work_exp",
 	inputLabel: "Work Experience",
 	selectLabel: "Select the number of years that you have been coding professionally for",
 	selectItems: [
@@ -160,8 +172,8 @@ export const formInputs: SelectFormInput[] = [
 	remoteWork,
 	educationLevel,
 	yearsCoding,
-	country,
 	organizationSize,
+	country,
 	age,
 	gender,
 	ethnicity,

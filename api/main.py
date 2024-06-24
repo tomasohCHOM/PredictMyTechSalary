@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 from fastapi import FastAPI
 import pickle as pkl
@@ -9,15 +9,16 @@ class Items(BaseModel):
     main_branch: str
     employment: str
     remote_work: str
+    ed_level: str
     years_code: str
     org_size: str
     country: str
     age: str
     gender: str
-    trans: Optional[str]
-    sexuality: Optional[str]
+    trans: Optional[str] = Field(None)
+    sexuality: Optional[str] = Field(None)
     ethnicity: str
-    accessibility: Optional[str]
+    accessibility: Optional[str] = Field(None)
     work_exp: str
 
 
@@ -30,7 +31,7 @@ def load_model():
 app = FastAPI()
 
 
-@app.get("/predict")
+@app.post("/predict")
 def predict(items: Items):
     return {"salary": 100000}
 

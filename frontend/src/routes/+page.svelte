@@ -44,7 +44,7 @@
 								{/each}
 							</Select.Group>
 						</Select.Content>
-						<Select.Input name="favoriteFruit" />
+						<Select.Input name={formInput.inputLabel} />
 					</Select.Root>
 				</div>
 			{/each}
