@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 from fastapi import FastAPI
 import pickle as pkl
 import uvicorn
@@ -13,10 +14,10 @@ class Items(BaseModel):
     country: str
     age: str
     gender: str
-    trans: str
-    sexuality: str
+    trans: Optional[str]
+    sexuality: Optional[str]
     ethnicity: str
-    accessibility: str
+    accessibility: Optional[str]
     work_exp: str
 
 

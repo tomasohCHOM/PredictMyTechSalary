@@ -38,8 +38,8 @@
 							<Select.Group>
 								<Select.Label>{formInput.inputLabel}</Select.Label>
 								{#each formInput.selectItems as selectItem}
-									<Select.Item value={selectItem.value} label={selectItem.label}>
-										{selectItem.label}
+									<Select.Item value={selectItem} label={selectItem}>
+										{selectItem}
 									</Select.Item>
 								{/each}
 							</Select.Group>
@@ -114,6 +114,7 @@
 		background-color: rgb(var(--contrast-200));
 		color: rgb(var(--contrast-700));
 		font-size: 1rem;
+		font-weight: 600;
 		transition: filter 150ms ease;
 	}
 
