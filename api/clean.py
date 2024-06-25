@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
+import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -11,70 +9,91 @@ sns.set_theme()
 df = pd.read_csv("data/datacopy.csv")
 
 
+COLUMNS = [
+    "MainBranch",
+    "Employment",
+    "RemoteWork",
+    "EdLevel",
+    "YearsCode",
+    "Country",
+    "OrgSize",
+    "Age",
+    "Gender",
+    "Trans",
+    "Sexuality",
+    "Ethnicity",
+    "Accessibility",
+    "MentalHealth",
+    "WorkExp",
+]
+
+UNUSED_COLUMNS = [
+    "CodingActivities",
+    "LearnCode",
+    "LearnCodeOnline",
+    "LearnCodeCoursesCert",
+    "DevType",
+    "PurchaseInfluence",
+    "BuyNewTool",
+    "LanguageWantToWorkWith",
+    "DatabaseHaveWorkedWith",
+    "DatabaseWantToWorkWith",
+    "PlatformHaveWorkedWith",
+    "PlatformWantToWorkWith",
+    "WebframeHaveWorkedWith",
+    "WebframeWantToWorkWith",
+    "MiscTechHaveWorkedWith",
+    "MiscTechWantToWorkWith",
+    "ToolsTechHaveWorkedWith",
+    "ToolsTechWantToWorkWith",
+    "NEWCollabToolsHaveWorkedWith",
+    "NEWCollabToolsWantToWorkWith",
+    "OpSysProfessional use",
+    "OpSysPersonal use",
+    "VersionControlSystem",
+    "VCInteraction",
+    "VCHostingPersonal use",
+    "VCHostingProfessional use",
+    "OfficeStackAsyncHaveWorkedWith",
+    "OfficeStackAsyncWantToWorkWith",
+    "OfficeStackSyncHaveWorkedWith",
+    "OfficeStackSyncWantToWorkWith",
+    "Blockchain",
+    "NEWSOSites",
+    "SOVisitFreq",
+    "SOAccount",
+    "SOPartFreq",
+    "SOComm",
+    "TBranch",
+    "ICorPM",
+    "Knowledge_1",
+    "Knowledge_2",
+    "Knowledge_3",
+    "Knowledge_4",
+    "Knowledge_5",
+    "Knowledge_6",
+    "Knowledge_7",
+    "Frequency_1",
+    "Frequency_2",
+    "Frequency_3",
+    "TimeSearching",
+    "TimeAnswering",
+    "Onboarding",
+    "ProfessionalTech",
+    "TrueFalse_1",
+    "TrueFalse_2",
+    "TrueFalse_3",
+    "SurveyLength",
+    "SurveyEase",
+    "CompTotal",
+    "CompFreq",
+    "Currency",
+]
+
+
 # Let's drop colums that we won't use, duplicates and NaN rows
 df.drop(
-    columns=[
-        "CodingActivities",
-        "LearnCode",
-        "LearnCodeOnline",
-        "LearnCodeCoursesCert",
-        "DevType",
-        "PurchaseInfluence",
-        "BuyNewTool",
-        "LanguageWantToWorkWith",
-        "DatabaseHaveWorkedWith",
-        "DatabaseWantToWorkWith",
-        "PlatformHaveWorkedWith",
-        "PlatformWantToWorkWith",
-        "WebframeHaveWorkedWith",
-        "WebframeWantToWorkWith",
-        "MiscTechHaveWorkedWith",
-        "MiscTechWantToWorkWith",
-        "ToolsTechHaveWorkedWith",
-        "ToolsTechWantToWorkWith",
-        "NEWCollabToolsHaveWorkedWith",
-        "NEWCollabToolsWantToWorkWith",
-        "OpSysProfessional use",
-        "OpSysPersonal use",
-        "VersionControlSystem",
-        "VCInteraction",
-        "VCHostingPersonal use",
-        "VCHostingProfessional use",
-        "OfficeStackAsyncHaveWorkedWith",
-        "OfficeStackAsyncWantToWorkWith",
-        "OfficeStackSyncHaveWorkedWith",
-        "OfficeStackSyncWantToWorkWith",
-        "Blockchain",
-        "NEWSOSites",
-        "SOVisitFreq",
-        "SOAccount",
-        "SOPartFreq",
-        "SOComm",
-        "TBranch",
-        "ICorPM",
-        "Knowledge_1",
-        "Knowledge_2",
-        "Knowledge_3",
-        "Knowledge_4",
-        "Knowledge_5",
-        "Knowledge_6",
-        "Knowledge_7",
-        "Frequency_1",
-        "Frequency_2",
-        "Frequency_3",
-        "TimeSearching",
-        "TimeAnswering",
-        "Onboarding",
-        "ProfessionalTech",
-        "TrueFalse_1",
-        "TrueFalse_2",
-        "TrueFalse_3",
-        "SurveyLength",
-        "SurveyEase",
-        "CompTotal",
-        "CompFreq",
-        "Currency",
-    ],
+    columns=UNUSED_COLUMNS,
     inplace=True,
 )
 
@@ -86,105 +105,91 @@ df = df.drop_duplicates()
 df = df.dropna()
 
 
-# Replacing string values in the columns with numericals ones + desplaying unique values + convert values to int
+def factorize_columns(column_name: str):
+    codes, uniques = pd.factorize(df[column_name])
+    # Add 1 to the codes to start from 1 instead of 0
+    df.loc[:, column_name] = codes + 1
+    df[column_name] = df[column_name].astype(int)
 
-df.loc[:, "MainBranch"] = pd.factorize(df["MainBranch"])[0] + 1
-df["MainBranch"] = df["MainBranch"].astype(int)
-
-
-df.loc[:, "Employment"] = pd.factorize(df["Employment"])[0] + 1
-df["Employment"] = df["Employment"].astype(int)
-
-
-df.loc[:, "RemoteWork"] = pd.factorize(df["RemoteWork"])[0] + 1
-df["RemoteWork"] = df["RemoteWork"].astype(int)
-
-df.loc[:, "EdLevel"] = pd.factorize(df["EdLevel"])[0] + 1
-df["EdLevel"] = df["EdLevel"].astype(int)
-
-# let's group all year of code into 5 groups: less than 5 year, from 5 to 10, from 11 to 20, from 21 to 40
-# and more than 40
+    # Map string values to their corresponding factorizations
+    mapping_dict = {uniques[i]: int(codes[i]) + 1 for i in range(len(uniques))}
+    factorization_mappings[column_name] = mapping_dict
 
 
+# Groups all YearsCode values into 5 groups:
+# less than 5 year, from 5 to 10, from 11 to 20,
+# from 21 to 40 and more than 40
 def process_age(age):
     if age == "Less than 1 year":
+        factorization_mappings["YearsCode"][age] = 0
         return 1
     elif age == "More than 50 years":
+        factorization_mappings["YearsCode"][age] = 0
         return 5
+
     age = int(age)
     if age < 5:
-        return 1
+        factorization = 1
     elif age >= 5 and age <= 10:
-        return 2
+        factorization = 2
     elif age > 10 and age <= 20:
-        return 3
+        factorization = 3
     elif age > 20 and age <= 40:
-        return 4
+        factorization = 4
     else:
-        return 5
+        factorization = 5
+
+    if age not in factorization_mappings["YearsCode"]:
+        factorization_mappings["YearsCode"][age] = factorization
+    return factorization
 
 
-# Apply the function to the column and create a new column
-df.loc[:, "YearsCode"] = df["YearsCode"].apply(process_age)
-
-df.loc[:, "Country"] = pd.factorize(df["Country"])[0] + 1
-df["Country"] = df["Country"].astype(int)
-
-
-df.loc[:, "OrgSize"] = pd.factorize(df["OrgSize"])[0] + 1
-df["OrgSize"] = df["OrgSize"].astype(int)
-
-
-df.loc[:, "Age"] = pd.factorize(df["Age"])[0] + 1
-df["Age"] = df["Age"].astype(int)
-
-
-df.loc[:, "Gender"] = pd.factorize(df["Gender"])[0] + 1
-df["Gender"] = df["Gender"].astype(int)
-
-
-df.loc[:, "Trans"] = pd.factorize(df["Trans"])[0] + 1
-df["Trans"] = df["Trans"].astype(int)
-
-df.loc[:, "Sexuality"] = pd.factorize(df["Sexuality"])[0] + 1
-df["Sexuality"] = df["Sexuality"].astype(int)
-
-
-# Only get the 20 most occurring ethnicities (there are thousands of values for this column)
-filtered_ethnicities = df["Ethnicity"].value_counts()[:20].index.tolist()
-df = df[df["Ethnicity"].isin(filtered_ethnicities)]
-df.loc[:, "Ethnicity"] = pd.factorize(df["Ethnicity"])[0] + 1
-df["Ethnicity"] = df["Ethnicity"].astype(int)
-
-df.loc[:, "Accessibility"] = pd.factorize(df["Accessibility"])[0] + 1
-df["Accessibility"] = df["Accessibility"].astype(int)
-
-df.loc[:, "MentalHealth"] = pd.factorize(df["MentalHealth"])[0] + 1
-df["MentalHealth"] = df["MentalHealth"].astype(int)
-
-
-# let's group all year of work experiece into 5 groups: less than 5 year, from 5 to 10, from 11 to 20, from 21 to 40
-# and more than 40
+# Groups all WorkExp values into 5 groups:
+# less than 5 year, from 5 to 10, from 11 to 20,
+# from 21 to 40 and more than 40
 def process_work_age(age):
     age = int(age)
-    age = int(age)
     if age < 5:
-        return 0
+        factorization = 0
     elif age >= 5 and age <= 10:
-        return 1
+        factorization = 1
     elif age > 10 and age <= 20:
-        return 2
+        factorization = 2
     elif age > 20 and age <= 40:
-        return 3
+        factorization = 3
     else:
-        return 4
+        factorization = 4
+
+    if age not in factorization_mappings["WorkExp"]:
+        factorization_mappings["WorkExp"][age] = factorization
+    return factorization
 
 
-# Apply the function to the column and create a new column
-df.loc[:, "WorkExp"] = df["WorkExp"].apply(process_work_age)
+# Replacing string values in the columns with numericals ones + desplaying unique values + convert values to int
+factorization_mappings = {}
+
+for column_name in COLUMNS:
+    if column_name == "YearsCode":
+        factorization_mappings["YearsCode"] = {}
+        # Apply the function to the column and create a new column
+        df.loc[:, column_name] = df[column_name].apply(process_age)
+    elif column_name == "Ethnicity":
+        # Only get the 20 most occurring ethnicities (there are thousands of values for this column)
+        filtered_ethnicities = df[column_name].value_counts()[:20].index.tolist()
+        df = df[df[column_name].isin(filtered_ethnicities)]
+        factorize_columns(column_name=column_name)
+    elif column_name == "WorkExp":
+        factorization_mappings["WorkExp"] = {}
+        # Apply the function to the column and create a new column
+        df.loc[:, column_name] = df[column_name].apply(process_work_age)
+    else:
+        factorize_columns(column_name=column_name)
 
 df["ConvertedCompYearly"] = df["ConvertedCompYearly"].astype(int)
 
+# Dump the mappings in json format to mappings.json
+with open("mappings.json", "w") as fp:
+    json.dump(factorization_mappings, fp, indent=2)
 
 # Make historgram to understand the distibution
 for i in df.select_dtypes(include="number").columns:
@@ -192,7 +197,7 @@ for i in df.select_dtypes(include="number").columns:
     plt.show()
 
 
-# Boxplot to identify Outliers
+# # Boxplot to identify Outliers
 for i in df.select_dtypes(include="number").columns:
     sns.boxplot(data=df, x=i)
     plt.show()
@@ -224,33 +229,15 @@ sns.boxplot(x=df["ConvertedCompYearly"])
 plt.show()
 
 
-# Now let's drop unuseful columns again
+# Drop unuseful columns again
 df = df.drop(columns=["LanguageHaveWorkedWith", "YearsCodePro"])
 
 # import cleaned data into new file "CleanedData"
 df1 = df
 df1.to_csv("data/cleaned.csv")
 
-# Let's scatter plot to understand the relationship
-
-for i in [
-    "MainBranch",
-    "Employment",
-    "RemoteWork",
-    "EdLevel",
-    "YearsCode",
-    "OrgSize",
-    "Country",
-    "Age",
-    "Gender",
-    "Trans",
-    "Sexuality",
-    "Ethnicity",
-    "Accessibility",
-    "MentalHealth",
-    "WorkExp",
-    "ConvertedCompYearly",
-]:
+# Scatter plot to understand the relationship
+for i in COLUMNS + ["ConvertedCompYearly"]:
     sns.scatterplot(data=df, x=i, y="ConvertedCompYearly")
     plt.show()
 

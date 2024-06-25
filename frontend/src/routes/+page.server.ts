@@ -8,12 +8,11 @@ export const actions: Actions = {
 		const formData = await request.formData();
 
 		for (const formInput of formInputs) {
-			// const inputValue = formData.get(formInput.inputLabel)?.toString() ?? "";
-			// if (inputValue === "" || inputValue === "undefined") {
-			// 	return { success: false };
-			// }
-			// requestBody[formInput.requestAttributeName] = inputValue;
-			requestBody[formInput.requestAttributeName] = formInput.selectItems[0];
+			const inputValue = formData.get(formInput.inputLabel)?.toString() ?? "";
+			if (inputValue === "" || inputValue === "undefined") {
+				return { success: false };
+			}
+			requestBody[formInput.requestAttributeName] = inputValue;
 		}
 
 		const url = PUBLIC_API_URL + "/predict";

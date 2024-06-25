@@ -1,9 +1,10 @@
 from pydantic import BaseModel, Field
 from typing import Optional
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import pandas as pd
 import pickle as pkl
 import uvicorn
+import json
 
 
 class Items(BaseModel):
@@ -29,34 +30,50 @@ def load_model():
     return model
 
 
+def load_mappings():
+    with open("mappings.json", "r") as fp:
+        mappings = json.load(fp)
+    return mappings
+
+
+# Helper function for handling a range of years
+def handleYears(year_range):
+    if year_range == "Less than 5 years":
+        return 2
+    if year_range == "From 5 to 10 years":
+        return 7
+    if year_range == "From 11 to 20 years":
+        return 12
+    if year_range == "From 21 to 40 years":
+        return 25
+    return 42
+
+
 model = load_model()
-
-input_df = pd.DataFrame(
-    {
-        "MainBranch": [2],
-        "Employment": [1],
-        "RemoteWork": [1],
-        "EdLevel": [1],
-        "YearsCode": [2],
-        "OrgSize": [1],
-        "Country": [4],
-        "Age": [2],
-        "Gender": [1],
-        "Trans": [1],
-        "Sexuality": [2],
-        "Ethnicity": [1],
-        "Accessibility": [1],
-        "WorkExp": [1],
-    }
-)
-
-predicted_salary = model.predict(input_df.values)
+mappings = load_mappings()
 
 app = FastAPI()
 
 
 @app.post("/predict")
 def predict(items: Items):
+    converted_items = dict(items)
+    inputs = {}
+    inputs["Trans"] = 1
+    inputs["Sexuality"] = 1
+    inputs["Accessibility"] = 1
+    for model_input, v in converted_items.items():
+        if model_input == "YearsCode" or model_input == "WorkExp":
+            inputs[model_input] = [handleYears(v)]
+            continue
+        if model_input in set(["Trans", "Sexuality", "Accessibility"]):
+            continue
+        if v not in mappings[model_input]:
+            print(model_input, v)
+            return HTTPException(status_code=422, detail="Value not present")
+        inputs[model_input] = [mappings[model_input][v]]
+    input_df = pd.DataFrame(inputs)
+    predicted_salary = model.predict(input_df.values)
     return {"salary": predicted_salary[0]}
 
 
