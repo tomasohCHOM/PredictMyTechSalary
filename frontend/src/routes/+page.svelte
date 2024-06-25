@@ -21,7 +21,7 @@
 		{#if !form || !form.salary}
 			<span class="salary-empty">$ - - - , - - -</span>
 		{:else}
-			<span class="salary">${form.salary}</span>
+			<span class="salary">$ {form.salary}</span>
 		{/if}
 	</div>
 

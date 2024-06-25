@@ -6,7 +6,7 @@ type SelectFormInput = {
 };
 
 const devProfessionStatus: SelectFormInput = {
-	requestAttributeName: "main_branch",
+	requestAttributeName: "MainBranch",
 	inputLabel: "Developer Profession Status",
 	selectLabel: "Select your developer profession status",
 	selectItems: [
@@ -16,7 +16,7 @@ const devProfessionStatus: SelectFormInput = {
 };
 
 const employmentStatus: SelectFormInput = {
-	requestAttributeName: "employment",
+	requestAttributeName: "Employment",
 	inputLabel: "Employment Status",
 	selectLabel: "Select your employment status",
 	selectItems: [
@@ -28,14 +28,14 @@ const employmentStatus: SelectFormInput = {
 };
 
 const remoteWork: SelectFormInput = {
-	requestAttributeName: "remote_work",
+	requestAttributeName: "RemoteWork",
 	inputLabel: "Remote Work",
 	selectLabel: "Select remote work option",
 	selectItems: ["Fully remote", "Hybrid (some remote, some in-person)", "Full in-person"]
 };
 
 const educationLevel: SelectFormInput = {
-	requestAttributeName: "ed_level",
+	requestAttributeName: "EdLevel",
 	inputLabel: "Education Level",
 	selectLabel: "Select education Level",
 	selectItems: [
@@ -52,7 +52,7 @@ const educationLevel: SelectFormInput = {
 };
 
 const yearsCoding: SelectFormInput = {
-	requestAttributeName: "years_code",
+	requestAttributeName: "YearsCode",
 	inputLabel: "Years Coding",
 	selectLabel: "Select the number of years you have been coding for (professionally or not)",
 	selectItems: [
@@ -65,7 +65,7 @@ const yearsCoding: SelectFormInput = {
 };
 
 const organizationSize: SelectFormInput = {
-	requestAttributeName: "org_size",
+	requestAttributeName: "OrgSize",
 	inputLabel: "Organization Size",
 	selectLabel: "Select the size of your organization",
 	selectItems: [
@@ -83,7 +83,7 @@ const organizationSize: SelectFormInput = {
 };
 
 const country: SelectFormInput = {
-	requestAttributeName: "country",
+	requestAttributeName: "Country",
 	inputLabel: "Country",
 	selectLabel: "Select your country",
 	selectItems: [
@@ -105,7 +105,7 @@ const country: SelectFormInput = {
 };
 
 const age: SelectFormInput = {
-	requestAttributeName: "age",
+	requestAttributeName: "Age",
 	inputLabel: "Age",
 	selectLabel: "Select an age",
 	selectItems: [
@@ -121,7 +121,7 @@ const age: SelectFormInput = {
 };
 
 const gender: SelectFormInput = {
-	requestAttributeName: "gender",
+	requestAttributeName: "Gender",
 	inputLabel: "Gender",
 	selectLabel: "Select a gender",
 	selectItems: [
@@ -133,7 +133,7 @@ const gender: SelectFormInput = {
 };
 
 const ethnicity: SelectFormInput = {
-	requestAttributeName: "ethnicity",
+	requestAttributeName: "Ethnicity",
 	inputLabel: "Ethnicity",
 	selectLabel: "Select your ethnicity",
 	selectItems: [
@@ -154,7 +154,7 @@ const ethnicity: SelectFormInput = {
 };
 
 const workExperience: SelectFormInput = {
-	requestAttributeName: "work_exp",
+	requestAttributeName: "WorkExp",
 	inputLabel: "Work Experience",
 	selectLabel: "Select the number of years that you have been coding professionally for",
 	selectItems: [
