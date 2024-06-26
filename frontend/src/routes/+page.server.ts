@@ -15,6 +15,8 @@ export const actions: Actions = {
 			requestBody[formInput.requestAttributeName] = inputValue;
 		}
 
+		console.log(JSON.stringify(requestBody));
+
 		const url = PUBLIC_API_URL + "/predict";
 
 		// Call the API passing the request body
