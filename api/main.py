@@ -1,7 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 from fastapi import FastAPI, HTTPException
-import pandas as pd
 import pickle as pkl
 import uvicorn
 import json
@@ -24,18 +23,6 @@ class Items(BaseModel):
     WorkExp: str
 
 
-def load_model():
-    with open("model/model.pkl", "rb") as model_file:
-        model = pkl.load(model_file)
-    return model
-
-
-def load_mappings():
-    with open("mappings.json", "r") as fp:
-        mappings = json.load(fp)
-    return mappings
-
-
 # Helper function for handling a range of years
 def handleYears(year_range):
     if year_range == "Less than 5 years":
@@ -49,31 +36,49 @@ def handleYears(year_range):
     return 42
 
 
+def load_model():
+    with open("model/model.pkl", "rb") as model_file:
+        model = pkl.load(model_file)
+    return model
+
+
+def load_mappings():
+    with open("mappings.json", "r") as fp:
+        mappings = json.load(fp)
+    return mappings
+
+
 model = load_model()
 mappings = load_mappings()
 
 app = FastAPI()
 
 
+@app.get("/")
+def entry():
+    return {"salary": 100000.0}
+
+
 @app.post("/predict")
 def predict(items: Items):
     converted_items = dict(items)
     inputs = {}
-    inputs["Trans"] = 1
-    inputs["Sexuality"] = 1
-    inputs["Accessibility"] = 1
+
     for model_input, v in converted_items.items():
         if model_input == "YearsCode" or model_input == "WorkExp":
             inputs[model_input] = [handleYears(v)]
             continue
         if model_input in set(["Trans", "Sexuality", "Accessibility"]):
+            inputs[model_input] = [1]
             continue
         if v not in mappings[model_input]:
             print(model_input, v)
             return HTTPException(status_code=422, detail="Value not present")
         inputs[model_input] = [mappings[model_input][v]]
-    input_df = pd.DataFrame(inputs)
-    predicted_salary = model.predict(input_df.values)
+
+    input_values = [[input_value[0] for input_value in inputs.values()]]
+    predicted_salary = model.predict(input_values)
+
     return {"salary": predicted_salary[0]}
 
 
