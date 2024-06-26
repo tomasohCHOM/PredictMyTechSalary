@@ -4,7 +4,6 @@ from fastapi import FastAPI, HTTPException
 import pickle as pkl
 import uvicorn
 import json
-import os
 
 
 class Items(BaseModel):
@@ -41,17 +40,6 @@ def load_model():
     with open("model/model.pkl", "rb") as model_file:
         model = pkl.load(model_file)
     return model
-    # try:
-    #     # Check if the file exists
-    #     file_path = "model/model.pkl"
-    #     with open(file_path, "rb") as model_file:
-    #         model = pkl.load(model_file)
-    #         print(model)
-
-    #         return model
-    # except Exception as e:
-    #     print(f"An error occurred: {e}")
-    #     return None
 
 
 def load_mappings():
@@ -68,7 +56,6 @@ app = FastAPI()
 
 @app.get("/")
 def entry():
-    load_model()
     return {"salary": 100000.0}
 
 
@@ -76,6 +63,7 @@ def entry():
 def predict(items: Items):
     converted_items = dict(items)
     inputs = {}
+
     for model_input, v in converted_items.items():
         if model_input == "YearsCode" or model_input == "WorkExp":
             inputs[model_input] = [handleYears(v)]
@@ -87,9 +75,10 @@ def predict(items: Items):
             print(model_input, v)
             return HTTPException(status_code=422, detail="Value not present")
         inputs[model_input] = [mappings[model_input][v]]
-    # predicted_salary = model.predict(inputs)
+
     input_values = [[input_value[0] for input_value in inputs.values()]]
     predicted_salary = model.predict(input_values)
+
     return {"salary": predicted_salary[0]}
 
 
