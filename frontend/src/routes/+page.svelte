@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
 	import * as Select from "$lib/components/select/index.js";
 	import type { ActionData } from "./$types";
 	import { formInputs } from "$lib/form/inputs";
 	import Spinner from "$lib/components/spinner.svelte";
 
 	export let form: ActionData;
-
-	let isFormLoading: boolean = false;
 </script>
 
 <main>
@@ -20,17 +17,7 @@
 		{/if}
 	</div>
 
-	<form
-		method="post"
-		class="salary-form"
-		use:enhance={() => {
-			isFormLoading = true;
-			return async ({ update }) => {
-				await update();
-				isFormLoading = false;
-			};
-		}}
-	>
+	<form method="post" class="salary-form">
 		{#if form && !form.success}
 			<p class="text-red-400">{form.message}</p>
 		{/if}
@@ -59,10 +46,7 @@
 		</div>
 
 		<div class="submit">
-			{#if isFormLoading}
-				<Spinner />
-			{/if}
-			<button disabled={isFormLoading} type="submit" class="btn-submit">Predict!</button>
+			<button type="submit" class="btn-submit">Predict!</button>
 		</div>
 	</form>
 </main>
