@@ -10,7 +10,10 @@ export const actions: Actions = {
 		for (const formInput of formInputs) {
 			const inputValue = formData.get(formInput.inputLabel)?.toString() ?? "";
 			if (inputValue === "" || inputValue === "undefined") {
-				return { success: false };
+				return {
+					success: false,
+					message: 'Missing fields. Please complete all fields and press "Predict!" once again.'
+				};
 			}
 			requestBody[formInput.requestAttributeName] = inputValue;
 		}

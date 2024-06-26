@@ -3,16 +3,11 @@
 	import * as Select from "$lib/components/select/index.js";
 	import type { ActionData } from "./$types";
 	import { formInputs } from "$lib/form/inputs";
+	import Spinner from "$lib/components/spinner.svelte";
 
 	export let form: ActionData;
 
-	const fruits = [
-		{ value: "apple", label: "Apple" },
-		{ value: "banana", label: "Banana" },
-		{ value: "blueberry", label: "Blueberry" },
-		{ value: "grapes", label: "Grapes" },
-		{ value: "pineapple", label: "Pineapple" }
-	];
+	let isFormLoading: boolean = false;
 </script>
 
 <main>
@@ -25,7 +20,20 @@
 		{/if}
 	</div>
 
-	<form method="post" class="salary-form" use:enhance>
+	<form
+		method="post"
+		class="salary-form"
+		use:enhance={() => {
+			isFormLoading = true;
+			return async ({ update }) => {
+				await update();
+				isFormLoading = false;
+			};
+		}}
+	>
+		{#if form && !form.success}
+			<p class="text-red-400">{form.message}</p>
+		{/if}
 		<div class="salary-inputs">
 			{#each formInputs as formInput}
 				<div class="salary-input">
@@ -49,7 +57,13 @@
 				</div>
 			{/each}
 		</div>
-		<button type="submit" class="btn-submit">Calculate!</button>
+
+		<div class="submit">
+			{#if isFormLoading}
+				<Spinner />
+			{/if}
+			<button disabled={isFormLoading} type="submit" class="btn-submit">Predict!</button>
+		</div>
 	</form>
 </main>
 
@@ -104,6 +118,13 @@
 
 	.salary-input > span {
 		color: rgb(var(--foreground-600));
+	}
+
+	.submit {
+		place-self: end;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 	}
 
 	.btn-submit {
