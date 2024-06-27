@@ -23,7 +23,6 @@ COLUMNS = [
     "Sexuality",
     "Ethnicity",
     "Accessibility",
-    "MentalHealth",
     "WorkExp",
 ]
 
@@ -197,7 +196,7 @@ for i in df.select_dtypes(include="number").columns:
     plt.show()
 
 
-# # Boxplot to identify Outliers
+# # # Boxplot to identify Outliers
 for i in df.select_dtypes(include="number").columns:
     sns.boxplot(data=df, x=i)
     plt.show()
@@ -230,7 +229,7 @@ plt.show()
 
 
 # Drop unuseful columns again
-df = df.drop(columns=["LanguageHaveWorkedWith", "YearsCodePro"])
+df = df.drop(columns=["LanguageHaveWorkedWith", "YearsCodePro", "MentalHealth"])
 
 # import cleaned data into new file "CleanedData"
 df1 = df

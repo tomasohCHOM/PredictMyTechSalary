@@ -64,17 +64,19 @@ def predict(items: Items):
     converted_items = dict(items)
     inputs = {}
 
-    for model_input, v in converted_items.items():
-        if model_input == "YearsCode" or model_input == "WorkExp":
-            inputs[model_input] = [handleYears(v)]
+    print(mappings.keys())
+
+    for mapping_key in mappings.keys():
+        if mapping_key in set(["YearsCode", "WorkExp"]):
+            inputs[mapping_key] = [handleYears(converted_items[mapping_key])]
             continue
-        if model_input in set(["Trans", "Sexuality", "Accessibility"]):
-            inputs[model_input] = [1]
+        if mapping_key in set(["Trans", "Sexuality"]):
+            inputs[mapping_key] = [1]
             continue
-        if v not in mappings[model_input]:
-            print(model_input, v)
+        if converted_items[mapping_key] not in mappings[mapping_key]:
+            print(mapping_key, converted_items[mapping_key])
             return HTTPException(status_code=422, detail="Value not present")
-        inputs[model_input] = [mappings[model_input][v]]
+        inputs[mapping_key] = [mappings[mapping_key][converted_items[mapping_key]]]
 
     input_values = [[input_value[0] for input_value in inputs.values()]]
     predicted_salary = model.predict(input_values)

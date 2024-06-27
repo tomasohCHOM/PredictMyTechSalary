@@ -153,6 +153,20 @@ const ethnicity: SelectFormInput = {
 	]
 };
 
+const accessibility: SelectFormInput = {
+	requestAttributeName: "Accessibility",
+	inputLabel: "Accessibility",
+	selectLabel: "Select the following applicable accessibility issue",
+	selectItems: [
+		"I am deaf / hard of hearing",
+		"I am blind / have difficulty seeing",
+		"I am unable to / find it difficult to type",
+		"I am unable to / find it difficult to walk or stand without assistance",
+		"Prefer not to say",
+		"None of the above"
+	]
+};
+
 const workExperience: SelectFormInput = {
 	requestAttributeName: "WorkExp",
 	inputLabel: "Work Experience",
@@ -177,5 +191,6 @@ export const formInputs: SelectFormInput[] = [
 	age,
 	gender,
 	ethnicity,
-	workExperience
+	workExperience,
+	accessibility
 ];
