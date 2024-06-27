@@ -16,10 +16,10 @@ class Items(BaseModel):
     Country: str
     Age: str
     Gender: str
-    Trans: Optional[str] = Field(None)
-    Sexuality: Optional[str] = Field(None)
+    Trans: str
+    Sexuality: str
     Ethnicity: str
-    Accessibility: Optional[str] = Field(None)
+    Accessibility: str
     WorkExp: str
 
 
@@ -64,14 +64,9 @@ def predict(items: Items):
     converted_items = dict(items)
     inputs = {}
 
-    print(mappings.keys())
-
     for mapping_key in mappings.keys():
         if mapping_key in set(["YearsCode", "WorkExp"]):
             inputs[mapping_key] = [handleYears(converted_items[mapping_key])]
-            continue
-        if mapping_key in set(["Trans", "Sexuality"]):
-            inputs[mapping_key] = [1]
             continue
         if converted_items[mapping_key] not in mappings[mapping_key]:
             print(mapping_key, converted_items[mapping_key])

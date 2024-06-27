@@ -37,7 +37,7 @@ const remoteWork: SelectFormInput = {
 const educationLevel: SelectFormInput = {
 	requestAttributeName: "EdLevel",
 	inputLabel: "Education Level",
-	selectLabel: "Select education Level",
+	selectLabel: "Select your (most accurate) education Level",
 	selectItems: [
 		"Primary/elementary school",
 		"Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)",
@@ -69,15 +69,15 @@ const organizationSize: SelectFormInput = {
 	inputLabel: "Organization Size",
 	selectLabel: "Select the size of your organization",
 	selectItems: [
-		"20 to 99 employees",
-		"2 to 9 employees",
-		"5,000 to 9,999 employees",
-		"100 to 499 employees",
-		"10,000 or more employees",
 		"Just me - I am a freelancer, sole proprietor, etc.",
+		"2 to 9 employees",
+		"10 to 19 employees",
+		"20 to 99 employees",
+		"100 to 499 employees",
 		"500 to 999 employees",
 		"1,000 to 4,999 employees",
-		"10 to 19 employees",
+		"5,000 to 9,999 employees",
+		"10,000 or more employees",
 		"I don’t know"
 	]
 };
@@ -107,7 +107,7 @@ const country: SelectFormInput = {
 const age: SelectFormInput = {
 	requestAttributeName: "Age",
 	inputLabel: "Age",
-	selectLabel: "Select an age",
+	selectLabel: "Select your age",
 	selectItems: [
 		"Under 18 years old",
 		"18-24 years old",
@@ -123,12 +123,33 @@ const age: SelectFormInput = {
 const gender: SelectFormInput = {
 	requestAttributeName: "Gender",
 	inputLabel: "Gender",
-	selectLabel: "Select a gender",
+	selectLabel: "Select your gender",
 	selectItems: [
 		"Man",
 		"Woman",
 		"Non-binary, genderqueer, or gender non-conforming",
 		"Prefer not to say"
+	]
+};
+
+const trans: SelectFormInput = {
+	requestAttributeName: "Trans",
+	inputLabel: "Transgender",
+	selectLabel: "Would you identify yourself as transgender?",
+	selectItems: ["Yes", "No", "Prefer not to say"]
+};
+
+const sexuality: SelectFormInput = {
+	requestAttributeName: "Sexuality",
+	inputLabel: "Sexuality",
+	selectLabel: "Select your sexual orientation",
+	selectItems: [
+		"Straight / Heterosexual",
+		"Gay or Lesbian",
+		"Bisexual",
+		"Queer",
+		"Prefer not to say",
+		"Prefer to self-describe:"
 	]
 };
 
@@ -190,6 +211,8 @@ export const formInputs: SelectFormInput[] = [
 	country,
 	age,
 	gender,
+	trans,
+	sexuality,
 	ethnicity,
 	workExperience,
 	accessibility
