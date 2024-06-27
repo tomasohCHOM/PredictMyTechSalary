@@ -1,38 +1,29 @@
-# create-svelte
+# PredictMyTechSalary Frontend
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+The frontend application was created using SvelteKit, TypeScript, and shadcn-svelte.
 
-## Creating a project
+## Setup / Development
 
-If you're seeing this, you've probably already done this step. Congrats!
+Ensure that you have Node.js installed on your machine.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Open the `frontend/` directory that contains the client-side code and install its dependencies:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+cd frontend
+npm install
 ```
 
-## Building
+Before making requests to the server, create a `.env` inside `frontend/` with this value:
 
-To create a production version of your app:
-
-```bash
-npm run build
+```
+PUBLIC_API_URL="http://localhost:8000"
 ```
 
-You can preview the production build with `npm run preview`.
+This will connect the frontend application with the API.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Run the server locally with `npm run dev`. The website should now be viewable in `localhost:5173`.
+
+## Resources
+
+- [SvelteKit](https://kit.svelte.dev/)
+- [shadcn-svelte](https://shadcn-svelte.com/)
