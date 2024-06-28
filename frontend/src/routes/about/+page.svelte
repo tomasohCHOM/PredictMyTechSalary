@@ -11,7 +11,7 @@
 
 	<div class="prebody">
 		<span class="authors">Tomas Oh & Mariia Grushina</span>
-		<span class="article-info">5 minute read · June 6, 2024</span>
+		<span class="article-info">3 minute read · June 6, 2024</span>
 	</div>
 
 	<p>
@@ -33,7 +33,27 @@
 		world, including self-reported demographic data, such as gender, age, and ethnicity.
 	</p>
 
-	<h2>Building the model</h2>
+	<h2>Cleaning the dataset</h2>
+
+	<p>
+		We started by dropping unnecessary columns and all rows that were duplicates or had at least one
+		null value. We substituted all unique objects in each column (originally strings) with a number
+		using the pandas factorize function, and for columns with numerical values, such as "Age,"
+		splitted the values into range groups (below 18 years = 1, 18 to 24 years = 2, 25 to 34 = 3, and
+		so on). Then, after analyzing the data, we removed the outliers in the output column to achieve
+		better accuracy for the model.
+	</p>
+	<img src="/assets/data-cleaning.png" alt="Cleaning the dataset and factorizing columns" />
+	<p>
+		For the machine learning model, we tried the following training algorithms: Ridge Regressor,
+		Lasso Regressor, K Neighbors Regressor, Ada Boost Regressor, SVR, Random Forest Regressor, and
+		Gradient-Boosting Regressor. The last one performed the best on this dataset, so we did a
+		hyperparameter tuning for this model and saved it, with 48.24% accuracy.
+	</p>
+	<img
+		src="/assets/regressor-outputs.png"
+		alt="Comparing regressor outputs, highest one before hyperparameter tuning was 47.13%"
+	/>
 
 	<h2>The website</h2>
 
@@ -52,7 +72,7 @@
 	</p>
 	<p>
 		The client-server interaction works like this: the SvelteKit application has the form element
-		that, when the user fills in the information and presses the "Calculate!" button, will create a
+		that, when the user fills in the information and presses the "Predict!" button, will create a
 		request to the API endpoint (the FastAPI application). If all goes well, the endpoint will
 		respond with the predicted salary and render it in the website.
 	</p>
@@ -64,7 +84,35 @@
 
 	<h2>Challenges with building the model</h2>
 
-	<p>We had a shiton of problems.</p>
+	<p>
+		Our model was about 48.24% accurate. This means that there were likely other confounding
+		variables that we have not accounted for, such as: the developer profession (not all categories
+		in the tech industry are paid equally).
+	</p>
+	<p>
+		On top of that, we deployed the website on Vercel, but we were unable to deploy the API because
+		the package exceeded the 250 MB limit. Even after ignoring files unnecessary for the API itself
+		(the CSVs, the Jupyter notebooks), the size was still being exceeded due to the Python library
+		dependencies (pandas, sklearn). We found some solutions available online, but that required
+		changing services in a limited amount of time; due to time constraints, we could not get the
+		prediction functionality to work.
+	</p>
+	<p>
+		This project is open source, however, so if you are interested in giving it a try, you can find
+		the GitHub repository
+		<a class="underline" target="_blank" href="https://github.com/tomasohCHOM/PredictMyTechSalary">
+			here.
+		</a>
+	</p>
+
+	<h2>Conclusion</h2>
+
+	<p>
+		Overall, despite our challenges and shortcomings, this project gave us an unique and interesting
+		experience to interact with real datasets and create programs to address real social justice
+		issues; we have learned so much from this and we are grateful for this learning opportunity. If
+		you read this blog all the way, thank you for your time!
+	</p>
 
 	<div class="tags">
 		{#each tags as tag}
