@@ -187,7 +187,7 @@ for column_name in COLUMNS:
 df["ConvertedCompYearly"] = df["ConvertedCompYearly"].astype(int)
 
 # Dump the mappings in json format to mappings.json
-with open("mappings.json", "w") as fp:
+with open("mappings/mappings.json", "w") as fp:
     json.dump(factorization_mappings, fp, indent=2)
 
 # Make historgram to understand the distibution

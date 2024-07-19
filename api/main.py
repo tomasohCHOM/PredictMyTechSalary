@@ -43,7 +43,7 @@ def load_model():
 
 
 def load_mappings():
-    with open("mappings.json", "r") as fp:
+    with open("mappings/mappings.json", "r") as fp:
         mappings = json.load(fp)
     return mappings
 
