@@ -46,9 +46,9 @@ X = np.asarray(X).astype("float32")
 y = np.asarray(y).astype("float32")
 
 
-# Split data into training and test sets, 70% and 30%.
+# Split data into training and test sets, 80% and 20%.
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
+    X, y, test_size=0.2, random_state=42
 )
 
 

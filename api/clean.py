@@ -131,9 +131,9 @@ def process_age(age):
         factorization = 1
     elif age >= 5 and age <= 10:
         factorization = 2
-    elif age > 10 and age <= 20:
+    elif age > 10 and age <= 15:
         factorization = 3
-    elif age > 20 and age <= 40:
+    elif age > 15 and age <= 20:
         factorization = 4
     else:
         factorization = 5
@@ -152,9 +152,9 @@ def process_work_age(age):
         factorization = 0
     elif age >= 5 and age <= 10:
         factorization = 1
-    elif age > 10 and age <= 20:
+    elif age > 10 and age <= 15:
         factorization = 2
-    elif age > 20 and age <= 40:
+    elif age > 15 and age <= 20:
         factorization = 3
     else:
         factorization = 4
@@ -191,15 +191,15 @@ with open("mappings/mappings.json", "w") as fp:
     json.dump(factorization_mappings, fp, indent=2)
 
 # Make historgram to understand the distibution
-for i in df.select_dtypes(include="number").columns:
-    sns.histplot(data=df, x=i)
-    plt.show()
+# for i in df.select_dtypes(include="number").columns:
+#     sns.histplot(data=df, x=i)
+#     plt.show()
 
 
-# # # Boxplot to identify Outliers
-for i in df.select_dtypes(include="number").columns:
-    sns.boxplot(data=df, x=i)
-    plt.show()
+# # # # Boxplot to identify Outliers
+# for i in df.select_dtypes(include="number").columns:
+#     sns.boxplot(data=df, x=i)
+#     plt.show()
 
 
 # Let's work with "ConvertedCompYearly" as it has the most outliers
@@ -236,9 +236,9 @@ df1 = df
 df1.to_csv("data/cleaned.csv")
 
 # Scatter plot to understand the relationship
-for i in COLUMNS + ["ConvertedCompYearly"]:
-    sns.scatterplot(data=df, x=i, y="ConvertedCompYearly")
-    plt.show()
+# for i in COLUMNS + ["ConvertedCompYearly"]:
+#     sns.scatterplot(data=df, x=i, y="ConvertedCompYearly")
+#     plt.show()
 
 
 # Let's see the correlation with heat map
